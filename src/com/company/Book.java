@@ -6,7 +6,7 @@ public class Book {
     private String Author;
     private int Edition ;
     private int puplishedYear ;
-    private boolean Borrowed;
+    private boolean Borrowed = false;
 
     public int count = 0;
 
@@ -29,7 +29,9 @@ public class Book {
     public void setEdition(int Edition){
         this.Edition = Edition;
     }
-
+    public void setBorrowed(boolean Borrowed){
+        this.Borrowed = Borrowed;
+    }
 
 
 
@@ -51,5 +53,9 @@ public class Book {
     }
     public int getPuplishedYear(){
         return puplishedYear;
+    }
+
+    public boolean getBorrowed(){
+        return Borrowed;
     }
 }

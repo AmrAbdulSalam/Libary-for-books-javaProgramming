@@ -13,16 +13,17 @@ public class Main {
         String output ="";
         int index = -1; // means not found
         int num ; // should not be initilaze
-        int pls = -1;
+        int pls ;
+        int in , ne = 0;
         for(;;){
             System.out.print("> ");
             String commands = input.nextLine();
             String tokens [] = commands.split(" ");
             tokens[0] = tokens[0].toLowerCase();
 
-
+            pls = -1;
+            ne = 0;
             switch (tokens[0]){
-
                 case "add" :
                     if(tokens.length != 2){
                         System.out.println("Invalid inputs");
@@ -56,7 +57,7 @@ public class Main {
                     break;
 
                 case "set" :
-                    pls = -1;
+                    //pls = -1;
                     if(tokens.length > 3){
                         for(int i = 3 ; i < tokens.length ;i++){
                             output +=tokens[i] + " " ;
@@ -64,13 +65,13 @@ public class Main {
                         tokens[2] = tokens[2].toLowerCase(); // to ignore any capital litters
                         for(Book b : bookArr){
 
-                            pls ++;
                             if(b.getISBN().equals(tokens[1])){
                                 //System.out.println("Found");
                                 break;
-                            }
+                            }else
+                                pls ++;
                         }
-                        if(pls != -1){
+                        if(pls == 0){
                             switch (tokens[2]){
                                 case "title" :
                                     bookArr.get(pls).setTitle(output);
@@ -100,7 +101,7 @@ public class Main {
 
                     // get case
                 case "get" :
-                    pls = -1;
+                   // pls = -1;
                     for(Book b : bookArr){
                         pls ++;
                         if(b.getISBN().equals(tokens[1])){
@@ -125,12 +126,52 @@ public class Main {
                                 System.out.println(bookArr.get(pls).getPuplishedYear());
                                 break;
                         }
-                        pls = -1;
+
                     }
                     else{
                         System.out.println("No book found");
                     }
 
+                    break;
+
+                case "rent" :
+                    if(tokens.length == 2) {
+                        for (Book b : bookArr) {
+                            pls++;
+                            if (b.getISBN().equals(tokens[1]) && !b.getBorrowed()) {
+                                    System.out.println("Book found and you rent it");
+                                    ne++;
+                                    bookArr.get(pls).setBorrowed(true);
+                                    //System.out.println(bookArr.get(pls).getBorrowed());
+                            }
+                            if (ne == 0)
+                                System.out.println("No book found");
+                        }
+                    }
+                    else
+                        System.out.println("invalid inputs");
+                    break;
+
+                case "return" :
+                    if(tokens.length == 2){
+                        for(Book b : bookArr){
+                            pls ++;
+                            if (b.getISBN().equals(tokens[1])){
+                                ne ++;
+                                if(b.getBorrowed() == true){
+                                    System.out.println("Thank you for returning the book");
+                                    bookArr.get(pls).setBorrowed(false);
+                                }
+                                else
+                                    System.out.println("No book found");
+                            }
+                        }
+
+                        if(ne == 0)
+                            System.out.println("No book found");
+                    }
+                    else
+                        System.out.println("Invalid inputs");
                     break;
                 default :
                     System.out.println("Wrong commands please try again");
