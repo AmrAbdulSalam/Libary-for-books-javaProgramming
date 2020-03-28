@@ -13,12 +13,14 @@ public class Main {
         String output ="";
         int index;
         int num ;
+        int pls = 0;
         for(;;){
+            System.out.print("> ");
             String commands = input.nextLine();
             String tokens [] = commands.split(" ");
             tokens[0] = tokens[0].toLowerCase();
 
-            System.out.print("> ");
+
             switch (tokens[0]){
 
                 case "add" :
@@ -57,7 +59,7 @@ public class Main {
                         for(int i = 3 ; i < tokens.length ;i++){
                             output +=tokens[i] + " " ;
                         }
-                        index = bookArr.indexOf(book.getISBN());
+
 
                         tokens[2] = tokens[2].toLowerCase();
                         switch (tokens[2]){
@@ -82,8 +84,16 @@ public class Main {
                     }
                     break;
                 case "get" :
-                    index = bookArr.indexOf(tokens[1]);
-                    System.out.println("fre is " + index);
+                    for(Book b : bookArr){
+                        if(b.getISBN().equals(tokens[1])){
+                            System.out.println("found");
+                            pls++;
+                            break;
+                        }
+                        else
+                            System.out.println("We could not find your book");
+                    }
+                    System.out.println(pls);
                     break;
                 default :
                     System.out.println("Wrong commands please try again");
