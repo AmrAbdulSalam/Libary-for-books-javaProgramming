@@ -93,10 +93,11 @@ public class Main {
                                 }
 
                             }
-                            if(ne == 0)
-                                System.out.println("No book found");
+
                         }
                     }//if
+                    else if(ne == 0)
+                        System.out.println("No book found");
                     else
                         System.out.println("Invalid inputs");
                     break;
@@ -129,10 +130,11 @@ public class Main {
                                     break;
                             }
                         }
-                        if(ne == 0)
-                            System.out.println("No book found");
+
                     }
                     }
+                    else if(ne == 0)
+                        System.out.println("No book found");
                     else
                         System.out.println("Invalid inputs");
 
@@ -193,6 +195,32 @@ public class Main {
                     }
                     else
                         System.out.println("Invalid inputs");
+                    break;
+
+                case "search" :
+
+                    tokens[2] = tokens[2].toLowerCase();
+
+                    switch (tokens[1]){
+                        case "title" :
+                            for(Book b : bookArr){
+                                if(b.getTitle().toLowerCase().contains(tokens[2])){
+                                    ne++;
+                                    System.out.println(b.getTitle());
+                                }
+                            }
+                            if(ne == 0)
+                                System.out.println("Not found...");
+                            break;
+                        case "author" :
+                            for(Book b : bookArr){
+                                if(b.getTitle().toLowerCase().contains(tokens[2])){
+                                    ne++;
+                                    System.out.println(b.getAuthor());
+                                }
+                            }
+                            break;
+                    }
                     break;
                 default :
                     System.out.println("Wrong commands please try again");
