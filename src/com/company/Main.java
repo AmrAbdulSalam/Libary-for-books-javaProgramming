@@ -9,11 +9,11 @@ public class Main {
         ArrayList<Book> bookArr = new ArrayList<Book>();
         System.out.println("Welcome to my program please start using the given COMANDS : ");
         Scanner input = new Scanner(System.in);
-        Book book = new Book();
+        Book book ;
         String output ="";
-        int index;
-        int num ;
-        int pls = 0;
+        int index = -1; // means not found
+        int num ; // should not be initilaze
+        int pls = -1;
         for(;;){
             System.out.print("> ");
             String commands = input.nextLine();
@@ -28,6 +28,7 @@ public class Main {
                         System.out.println("Invalid inputs");
                     }
                     else {
+                        book = new Book();
                         book.setISBN(tokens[1]);
                         bookArr.add(book);
                         book.count++;
@@ -55,45 +56,81 @@ public class Main {
                     break;
 
                 case "set" :
-                    if(tokens.length >= 3){
+                    pls = -1;
+                    if(tokens.length > 3){
                         for(int i = 3 ; i < tokens.length ;i++){
                             output +=tokens[i] + " " ;
                         }
+                        tokens[2] = tokens[2].toLowerCase(); // to ignore any capital litters
+                        for(Book b : bookArr){
 
-
-                        tokens[2] = tokens[2].toLowerCase();
-                        switch (tokens[2]){
-                            case "title" :
-                                book.setTitle(tokens[3]);
+                            pls ++;
+                            if(b.getISBN().equals(tokens[1])){
+                                //System.out.println("Found");
                                 break;
-                            case "author" :
-                                book.setAuthor(tokens[3]);
-                                break;
-                            case "publish" :
-                                num = Integer.parseInt(tokens[3]);
-                                book.setPuplishedYear(num);
-                                break;
-
-                            case "edition" :
-
-                                break;
-                        }//case tokens[1]
+                            }
+                        }
+                        if(pls != -1){
+                            switch (tokens[2]){
+                                case "title" :
+                                    bookArr.get(pls).setTitle(output);
+                                    break;
+                                case "author" :
+                                    bookArr.get(pls).setAuthor(output);
+                                    break;
+                                case "publish" :
+                                    num = Integer.parseInt(tokens[3]);
+                                    bookArr.get(pls).setPuplishedYear(num);
+                                    break;
+                                case "edition" :
+                                    num = Integer.parseInt(tokens[3]);
+                                    bookArr.get(pls).setEdition(num);
+                                    break;
+                            }
+                            output="";
+                        }
+                        else{
+                            System.out.println("No book found");
+                        }
                     }//if
                     else {
                         System.out.println("Invalid inputs");
                     }
                     break;
+
+                    // get case
                 case "get" :
+                    pls = -1;
                     for(Book b : bookArr){
+                        pls ++;
                         if(b.getISBN().equals(tokens[1])){
-                            System.out.println("found");
-                            pls++;
+                            //System.out.println("Found");
                             break;
                         }
-                        else
-                            System.out.println("We could not find your book");
                     }
-                    System.out.println(pls);
+                    if(pls != -1){
+                        //System.out.println("The book is found ");
+                        switch (tokens[2]){
+                            case "title" :
+                                //System.out.println("in here");
+                                System.out.println(bookArr.get(pls).getTitle());
+                                break;
+                            case "author" :
+                                System.out.println(bookArr.get(pls).getAuthor());
+                                break;
+                            case "edition" :
+                                System.out.println(bookArr.get(pls).getEdition());
+                                break;
+                            case "publish" :
+                                System.out.println(bookArr.get(pls).getPuplishedYear());
+                                break;
+                        }
+                        pls = -1;
+                    }
+                    else{
+                        System.out.println("No book found");
+                    }
+
                     break;
                 default :
                     System.out.println("Wrong commands please try again");

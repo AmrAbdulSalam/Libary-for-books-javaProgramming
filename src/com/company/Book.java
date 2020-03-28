@@ -40,4 +40,16 @@ public class Book {
     public String getISBN(){
         return ISBN;
     }
+    public String getTitle(){
+        return Title;
+    }
+    public String getAuthor(){
+        return Author;
+    }
+    public int getEdition(){
+        return Edition;
+    }
+    public int getPuplishedYear(){
+        return puplishedYear;
+    }
 }
