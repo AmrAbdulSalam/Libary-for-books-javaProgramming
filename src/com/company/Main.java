@@ -23,6 +23,7 @@ public class Main {
             output="";
             pls = -1;
             ne = 0;
+
             switch (tokens[0]){
                 case "add" :
                     if(tokens.length != 2){
@@ -47,6 +48,13 @@ public class Main {
                         output = "\t\tISBN\t\t\t\t" + "Title\t\t\t\t\t  " + "Edition\t\t\t\t" + "Author\t\t\t" + "Year\t\t\t" + "Available";
                         System.out.println(output);
 
+                        for(Book b : bookArr){
+                            output = "\t\t"+b.getISBN() + "\t\t\t" + b.getTitle() + "\t\t\t" +
+                                    b.getEdition() + "th" + "\t\t\t\t\t" + b.getAuthor() + "\t\t\t" + b.getPuplishedYear()
+                                    + "\t\t\t" + (b.getBorrowed() ? "Not Available" : "Available");
+                            System.out.println(output);
+
+                        }
 
                     }//end of if lenght
                     else{
