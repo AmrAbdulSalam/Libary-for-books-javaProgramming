@@ -32,7 +32,7 @@ public class Main {
                         book = new Book();
                         book.setISBN(tokens[1]);
                         bookArr.add(book);
-                        book.count++;
+                        //book.count++;
                         System.out.println("Thank you for adding a new book :)");
                     }
                     break;
@@ -165,6 +165,23 @@ public class Main {
 
                         if(ne == 0)
                             System.out.println("No book found");
+                    }
+                    else
+                        System.out.println("Invalid inputs");
+                    break;
+                case "delete" :
+                    if(tokens.length == 2) {
+                        for (Book b : bookArr) {
+                            pls++;
+                            if (b.getISBN().equals(tokens[1])) {
+                                ne++;
+                                bookArr.remove(pls);
+                                break;
+                            }
+                        }
+                        if (ne == 0) {
+                            System.out.println("No book found");
+                        }
                     }
                     else
                         System.out.println("Invalid inputs");

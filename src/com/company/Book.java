@@ -6,13 +6,21 @@ public class Book {
     private String Author;
     private int Edition ;
     private int puplishedYear ;
-    private boolean Borrowed = false;
+    private boolean Borrowed;
 
     public int count = 0;
 
     //public String toString(){
        // return
     //}
+
+    public Book(){
+        Borrowed = false;
+        puplishedYear = 0000;
+        Edition = 1;
+        Title = "";
+        Author = "";
+    }
 
     public void setISBN(String ISBN){
         this.ISBN = ISBN;
@@ -32,11 +40,6 @@ public class Book {
     public void setBorrowed(boolean Borrowed){
         this.Borrowed = Borrowed;
     }
-
-
-
-
-
 
 
     public String getISBN(){
