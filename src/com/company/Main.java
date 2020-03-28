@@ -20,7 +20,7 @@ public class Main {
             String commands = input.nextLine();
             String tokens [] = commands.split(" ");
             tokens[0] = tokens[0].toLowerCase();
-
+            output="";
             pls = -1;
             ne = 0;
             switch (tokens[0]){
@@ -64,73 +64,69 @@ public class Main {
                         }
                         tokens[2] = tokens[2].toLowerCase(); // to ignore any capital litters
                         for(Book b : bookArr){
-
+                            pls ++;
                             if(b.getISBN().equals(tokens[1])){
-                                //System.out.println("Found");
-                                break;
-                            }else
-                                pls ++;
-                        }
-                        if(pls == 0){
-                            switch (tokens[2]){
-                                case "title" :
-                                    bookArr.get(pls).setTitle(output);
-                                    break;
-                                case "author" :
-                                    bookArr.get(pls).setAuthor(output);
-                                    break;
-                                case "publish" :
-                                    num = Integer.parseInt(tokens[3]);
-                                    bookArr.get(pls).setPuplishedYear(num);
-                                    break;
-                                case "edition" :
-                                    num = Integer.parseInt(tokens[3]);
-                                    bookArr.get(pls).setEdition(num);
-                                    break;
+                                ne ++;
+                                switch (tokens[2]){
+                                    case "title" :
+                                        bookArr.get(pls).setTitle(output);
+                                        break;
+                                    case "author" :
+                                        bookArr.get(pls).setAuthor(output);
+                                        break;
+                                    case "publish" :
+                                        num = Integer.parseInt(tokens[3]);
+                                        bookArr.get(pls).setPuplishedYear(num);
+                                        break;
+                                    case "edition" :
+                                        num = Integer.parseInt(tokens[3]);
+                                        bookArr.get(pls).setEdition(num);
+                                        break;
+                                }
+
                             }
-                            output="";
-                        }
-                        else{
-                            System.out.println("No book found");
+                            if(ne == 0)
+                                System.out.println("No book found");
                         }
                     }//if
-                    else {
+                    else
                         System.out.println("Invalid inputs");
-                    }
                     break;
 
                     // get case
                 case "get" :
                    // pls = -1;
+                    if(tokens.length == 3){
                     for(Book b : bookArr){
                         pls ++;
                         if(b.getISBN().equals(tokens[1])){
-                            //System.out.println("Found");
-                            break;
+                            //System.out.println("The book is found ");
+                            ne ++;
+                            switch (tokens[2]){
+                                case "title" :
+                                    //System.out.println("in here");
+                                    System.out.println(bookArr.get(pls).getTitle());
+                                    break;
+                                case "author" :
+                                    System.out.println(bookArr.get(pls).getAuthor());
+                                    break;
+                                case "edition" :
+                                    System.out.println(bookArr.get(pls).getEdition());
+                                    break;
+                                case "publish" :
+                                    System.out.println(bookArr.get(pls).getPuplishedYear());
+                                    break;
+                                case "rent" :
+                                    System.out.println(bookArr.get(pls).getBorrowed());
+                                    break;
+                            }
                         }
+                        if(ne == 0)
+                            System.out.println("No book found");
                     }
-                    if(pls != -1){
-                        //System.out.println("The book is found ");
-                        switch (tokens[2]){
-                            case "title" :
-                                //System.out.println("in here");
-                                System.out.println(bookArr.get(pls).getTitle());
-                                break;
-                            case "author" :
-                                System.out.println(bookArr.get(pls).getAuthor());
-                                break;
-                            case "edition" :
-                                System.out.println(bookArr.get(pls).getEdition());
-                                break;
-                            case "publish" :
-                                System.out.println(bookArr.get(pls).getPuplishedYear());
-                                break;
-                        }
-
                     }
-                    else{
-                        System.out.println("No book found");
-                    }
+                    else
+                        System.out.println("Invalid inputs");
 
                     break;
 
@@ -163,7 +159,7 @@ public class Main {
                                     bookArr.get(pls).setBorrowed(false);
                                 }
                                 else
-                                    System.out.println("No book found");
+                                    System.out.println("The book is already returned");
                             }
                         }
 
